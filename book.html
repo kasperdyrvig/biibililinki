@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="kl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="nofollow,noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biibilimi allakkat</title>
+    <style>
+        body {font-family: system-ui; font-size: 1.1rem;}
+        .books {list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr)); gap: .25rem;}
+        .chapters {list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr)); gap: .25rem;}
+        li > a {background-color: lightblue; padding: 1rem; text-decoration: none; color: black; display: flex; align-items: center; aspect-ratio: 1/1;}
+        li > a:hover {background-color: lightcyan;}
+        .chapters a {justify-content: center;}
+    </style>
+</head>
+<body onload="displayChapters()">
+    <h1></h1>
+    <ol class="chapters"></ol>
+    <template><li><a href="" title=""></a></li></template>
+    <script>
+        function displayChapters() {
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    const data = JSON.parse(this.responseText);
+                    const url = new URL(window.location);
+                    const params = new URLSearchParams(url.search);
+                    if (params.has("bi") === false || params.get("bi") == "") {
+                        window.location = "index.html";
+                    }
+                    const index = params.get("bi");
+                    const book = data[0].books[index];
+                    const h1 = document.querySelector("h1");
+                    h1.textContent = book.name;
+                    const listEl = document.querySelector("ol");
+                    const template = document.querySelector("template");
+                    for (let index = 1; index <= book.chapters; index++) {
+                        const clone = template.content.cloneNode(true);
+                        let a = clone.querySelector("a");
+                        a.textContent = index;
+                        a.setAttribute("title", book.name + " kapitali " + index);
+                        a.setAttribute("href", "http://old.bibelselskabet.dk/grobib/web/" + book.shortName.toLowerCase().replace(" ", "") + "/" + index + "b.htm");
+                        a.setAttribute("onclick", "alert('Du bliver nu dirergeret til Det Danske Bibelselskabs side');");
+                        listEl.appendChild(clone);
+                    }
+                } else {
+                    console.log("Could not read data");
+                }
+            };
+            xmlhttp.open("GET", "data.json", true);
+            xmlhttp.send();
+        }
+    </script>
+</body>
+</html>
