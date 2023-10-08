@@ -7,11 +7,9 @@
     <title>Biibilimi allakkat</title>
     <style>
         body {font-family: system-ui; font-size: 1.1rem;}
-        .books {list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr)); gap: .25rem;}
         .chapters {list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr)); gap: .25rem;}
-        li > a {background-color: lightblue; padding: 1rem; text-decoration: none; color: black; display: flex; align-items: center; aspect-ratio: 1/1;}
+        li > a {background-color: lightblue; padding: .5rem; font-size: 1.5rem; font-weight: bold; text-decoration: none; color: black; display: flex; align-items: center; aspect-ratio: 1/1; justify-content: center;}
         li > a:hover {background-color: lightcyan;}
-        .chapters a {justify-content: center;}
     </style>
 </head>
 <body onload="displayChapters()">
@@ -40,7 +38,7 @@
                         let a = clone.querySelector("a");
                         a.textContent = index;
                         a.setAttribute("title", book.name + " kapitali " + index);
-                        a.setAttribute("href", "http://old.bibelselskabet.dk/grobib/web/" + book.shortName.toLowerCase().replace(" ", "") + "/" + index + "b.htm");
+                        a.setAttribute("href", "http://old.bibelselskabet.dk/grobib/web/" + book.path + "/" + index + "b.htm");
                         a.setAttribute("onclick", "alert('Du bliver nu dirergeret til Det Danske Bibelselskabs side');");
                         listEl.appendChild(clone);
                     }
