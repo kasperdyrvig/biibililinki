@@ -8,12 +8,18 @@
     <style>
         body {font-family: system-ui; font-size: 1.1rem;}
         .chapters {list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr)); gap: .25rem;}
-        li > a {background-color: lightblue; padding: .5rem; font-size: 1.5rem; font-weight: bold; text-decoration: none; color: black; display: flex; align-items: center; aspect-ratio: 1/1; justify-content: center;}
-        li > a:hover {background-color: lightcyan;}
+        li > a {background-color: #9eeaf9; padding: .5rem; font-size: 1.5rem; font-weight: bold; text-decoration: none; color: black; display: flex; align-items: center; aspect-ratio: 1/1; justify-content: center;}
+        li > a:hover {background-color: #6edff6;}
+        footer {background-color: #fcfcfd; font-size: small; border: #e9ecef solid 1px; color: #495057; padding: 1rem; border-radius: .375rem; display: flex; gap: .375rem;}
+        footer > span {font-size: 1.3rem; line-height: 1; color: black;}
     </style>
 </head>
 <body onload="displayChapters()">
     <h1></h1>
+    <footer>
+        <span>🛈</span>
+        Når du vælger et kaptel, bliver nu dirergeret til Det Danske Bibelselskabs side
+    </footer>
     <ol class="chapters"></ol>
     <template><li><a href="" title=""></a></li></template>
     <script>
@@ -39,7 +45,6 @@
                         a.textContent = index;
                         a.setAttribute("title", book.name + " kapitali " + index);
                         a.setAttribute("href", "http://old.bibelselskabet.dk/grobib/web/" + book.path + "/" + index + "b.htm");
-                        a.setAttribute("onclick", "alert('Du bliver nu dirergeret til Det Danske Bibelselskabs side');");
                         listEl.appendChild(clone);
                     }
                 } else {

@@ -8,8 +8,8 @@
     <style>
         body {font-family: system-ui; font-size: 1.1rem;}
         .books {list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr)); gap: .25rem;}
-        li > a {background-color: lightblue; padding: .5rem; font-size: 1.5rem; font-weight: bold; text-decoration: none; color: black; display: flex; align-items: center; aspect-ratio: 1/1;}
-        li > a:hover {background-color: lightcyan;}
+        li > a {background-color: #9eeaf9; padding: .5rem; font-size: 1.5rem; font-weight: bold; text-decoration: none; color: black; display: flex; align-items: center; aspect-ratio: 1/1;}
+        li > a:hover {background-color: #6edff6;}
     </style>
 </head>
 <body onload="displayBooks()">
@@ -32,6 +32,7 @@
                         a.textContent = book.abbreviation;
                         a.setAttribute("title", book.name);
                         a.setAttribute("href", "book.html?bi=" + index);
+                        a.setAttribute("class", "group-" + book.group);
                         listEl.appendChild(clone);
                     }
                 } else {
